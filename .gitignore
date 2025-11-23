@@ -1,0 +1,109 @@
+# Global
+.DS_Store
+*.log
+logs/
+*.tmp
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# Environment / secrets
+.env
+.env.*
+*.env
+
+########################
+# .NET / C#
+########################
+
+# Build output
+bin/
+obj/
+
+# Visual Studio / Rider
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.csproj.user
+*.vbproj.user
+*.vcxproj.user
+_ReSharper*/
+*.DotSettings.user
+
+# NuGet
+packages/
+*.nupkg
+*.snupkg
+*.nuspec
+project.lock.json
+
+# Test results
+TestResult*/
+*.VisualState.xml
+*.coverage
+*.coveragexml
+
+# Other
+*.resharper
+*.orig
+
+########################
+# Python
+########################
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
+.eggs/
+*.egg-info/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Unit test / coverage
+.coverage
+.coverage.*
+.cache/
+.pytest_cache/
+htmlcov/
+
+# Type checker / linters
+.mypy_cache/
+.pytype/
+.ruff_cache/
+
+# Misc
+.python-version
+
+########################
+# Node / frontend
+########################
+
+node_modules/
+
+# Build output
+.dist/
+dist/
+.build/
+.next/
+.nuxt/
+.turbo/
+
+# Caches
+.npm/
+.yarn/
+.pnpm-store/
+.eslintcache
+.parcel-cache/
+vite.config.ts.timestamp-*
