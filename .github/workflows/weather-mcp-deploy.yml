@@ -35,7 +35,7 @@ jobs:
       - name: Deploy new revision to Azure Container Apps
         uses: azure/container-apps-deploy-action@v2
         with:
-          resourceGroup: YOUR_RESOURCE_GROUP_NAME
+          resourceGroup: rg-multi-agent-demo-eus2-mx01
           containerAppName: aca-weather-mcp-eus2-mx01
           imageToDeploy: crmultiagentdemoeus2mx01.azurecr.io/weather-mcp:${{ github.run_number }}
           environmentVariables: |
