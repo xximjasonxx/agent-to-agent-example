@@ -26,7 +26,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
-          context: .
+          context: mcp/Farrellsoft.MCP.Weather
           file: mcp/Farrellsoft.MCP.Weather/Dockerfile
           push: true
           tags: |
