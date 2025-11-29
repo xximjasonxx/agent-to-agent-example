@@ -8,4 +8,8 @@
     <AssemblyName>Backend</AssemblyName>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="ModelContextProtocol" Version="0.4.1-preview.1" />
+  </ItemGroup>
+
 </Project>

@@ -1,0 +1,74 @@
+name: Chat App Deployment
+
+on:
+  push:
+    paths:
+      - 'frontend/**'
+      - 'backend/**'
+      - '.github/workflows/chat-app-deploy.yml'
+  pull_request:
+    paths:
+      - 'backend/**'
+      - 'frontend/**'
+      - '.github/workflows/chat-app-deploy.yml'
+  workflow_dispatch:
+
+jobs:
+  backend:
+    name: Build backend
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Restore and build backend
+        run: |
+          dotnet restore mcp/Farrellsoft.MCP.Weather/Farrellsoft.MCP.Weather.csproj
+          dotnet build mcp/Farrellsoft.MCP.Weather/Farrellsoft.MCP.Weather.csproj --configuration Release --no-restore
+
+  frontend:
+    name: Build frontend
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+  deploy:
+    name: Deploy (uses DEPLOYMENT_TOKEN)
+    needs: [backend, frontend]
+    runs-on: ubuntu-latest
+    env:
+      DEPLOYMENT_TOKEN: ${{ secrets.DEPLOYMENT_TOKEN }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deployment placeholder
+        run: |
+          echo "Deployment would run here using the DEPLOYMENT_TOKEN secret. Replace this step with real deployment logic."
