@@ -12,7 +12,7 @@ on:
 env:
   AZURE_FUNCTIONAPP_NAME: func-nfl-api-cus-mx01
   AZURE_FUNCTIONAPP_PACKAGE_PATH: 'api/nfl-api'
-  PYTHON_VERSION: '3.12'
+  DOTNET_VERSION: '8.0.x'
 
 jobs:
   build-and-deploy:
@@ -22,16 +22,25 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Setup Python ${{ env.PYTHON_VERSION }}
-      uses: actions/setup-python@v5
+    - name: Setup .NET ${{ env.DOTNET_VERSION }}
+      uses: actions/setup-dotnet@v4
       with:
-        python-version: ${{ env.PYTHON_VERSION }}
+        dotnet-version: ${{ env.DOTNET_VERSION }}
 
-    - name: Install dependencies
+    - name: Restore dependencies
       run: |
         cd ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
-        python -m pip install --upgrade pip
-        pip install --target=".python_packages/lib/site-packages" -r requirements.txt
+        dotnet restore
+
+    - name: Build
+      run: |
+        cd ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+        dotnet build --configuration Release --no-restore
+
+    - name: Publish
+      run: |
+        cd ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+        dotnet publish --configuration Release --output ./output --no-build
 
     - name: Azure Login
       uses: azure/login@v2
@@ -42,7 +51,5 @@ jobs:
       uses: Azure/functions-action@v1
       with:
         app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
-        package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+        package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output
         respect-pom-xml: false
-        scm-do-build-during-deployment: false
-        enable-oryx-build: false
