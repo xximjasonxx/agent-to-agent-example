@@ -1,0 +1,6 @@
+@Farrellsoft.MCP.NFL_HostAddress = http://localhost:5127
+
+GET {{Farrellsoft.MCP.NFL_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
