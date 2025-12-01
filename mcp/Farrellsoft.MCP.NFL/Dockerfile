@@ -3,12 +3,12 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 
 # Copy csproj and restore dependencies
-COPY Farrellsoft.MCP.NFL.csproj .
-RUN dotnet restore
+COPY ["Farrellsoft.MCP.NFL.csproj", "/src/"]
+RUN dotnet restore "Farrellsoft.MCP.NFL.csproj"
 
 # Copy everything else and build
 COPY . .
-RUN dotnet publish -c Release -o /app/publish --no-restore
+RUN dotnet publish "Farrellsoft.MCP.NFL.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 # Runtime stage
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
