@@ -11,5 +11,8 @@ public class NflMcpServer : INflMcpServer
         _apiClient = apiClient ?? throw new ArgumentNullException(nameof(apiClient));
     }
 
-    // MCP server methods will be implemented here
+    public async Task<string> GetGamesPlayedAsync(int season, int week)
+    {
+        return await _apiClient.GetScheduleAsync(season, week);
+    }
 }

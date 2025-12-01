@@ -2,5 +2,5 @@ namespace Farrellsoft.MCP.NFL.Clients;
 
 public interface INflApiClient
 {
-    // API client methods will be defined here
+    Task<string> GetScheduleAsync(int season, int week, CancellationToken cancellationToken = default);
 }

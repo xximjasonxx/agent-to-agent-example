@@ -9,5 +9,10 @@ public class NflApiClient : INflApiClient
         _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
     }
 
-    // API client methods will be implemented here
+    public async Task<string> GetScheduleAsync(int season, int week, CancellationToken cancellationToken = default)
+    {
+        var response = await _httpClient.GetAsync($"schedule/{season}/week/{week}", cancellationToken);
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadAsStringAsync(cancellationToken);
+    }
 }
