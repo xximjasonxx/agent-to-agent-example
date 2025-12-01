@@ -1,4 +1,5 @@
 using Backend.Models;
+using ModelContextProtocol;
 
 namespace Backend.Services;
 
@@ -8,7 +9,7 @@ namespace Backend.Services;
 /// </summary>
 public sealed class AgentChatService : IChatService
 {
-    public Task<ChatResult> PostMessage(string message, string threadId = "")
+    public async Task<ChatResult> PostMessage(string message, string threadId = "")
     {
         // In a real implementation, call your AI model or agent here and manage
         // conversation state keyed by threadId. For now, this simply echoes back
@@ -20,6 +21,6 @@ public sealed class AgentChatService : IChatService
 
         var responseText = $"Echo: {message}";
 
-        return Task.FromResult(new ChatResult(responseText, effectiveThreadId));
+        return new ChatResult(responseText, effectiveThreadId);
     }
 }
