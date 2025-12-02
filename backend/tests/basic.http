@@ -1,0 +1,18 @@
+# Send A2A request to the pirate agent
+POST {{baseAddress}}/a2a/weather/v1/message:stream
+Content-Type: application/json
+{
+  "message": {
+    "kind": "message",
+    "role": "user",
+    "parts": [
+      {
+        "kind": "text",
+        "text": "What is the weather in Suwanee, GA",
+        "metadata": {}
+      }
+    ],
+	"messageId": null,
+    "contextId": "foo"
+  }
+}
