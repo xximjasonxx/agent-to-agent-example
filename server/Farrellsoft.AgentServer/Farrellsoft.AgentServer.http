@@ -1,0 +1,6 @@
+@Farrellsoft.AgentServer_HostAddress = http://localhost:5050
+
+GET {{Farrellsoft.AgentServer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
